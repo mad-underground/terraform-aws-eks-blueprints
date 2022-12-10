@@ -87,22 +87,22 @@ output "worker_node_security_group_id" {
 #-------------------------------
 output "self_managed_node_groups" {
   description = "Outputs from EKS Self-managed node groups "
-  value       = var.create_eks && length(var.self_managed_node_groups) > 0 ? module.aws_eks_self_managed_node_groups[*] : []
+  value       = var.eks.create_eks && length(var.eks.self_managed_node_groups) > 0 ? module.aws_eks_self_managed_node_groups[*] : []
 }
 
 output "self_managed_node_group_iam_role_arns" {
   description = "IAM role arn's of self managed node groups"
-  value       = var.create_eks && length(var.self_managed_node_groups) > 0 ? values({ for nodes in sort(keys(var.self_managed_node_groups)) : nodes => join(",", module.aws_eks_self_managed_node_groups[nodes].self_managed_nodegroup_iam_role_arns) }) : []
+  value       = var.eks.create_eks && length(var.eks.self_managed_node_groups) > 0 ? values({ for nodes in sort(keys(var.eks.self_managed_node_groups)) : nodes => join(",", module.aws_eks_self_managed_node_groups[nodes].self_managed_nodegroup_iam_role_arns) }) : []
 }
 
 output "self_managed_node_group_autoscaling_groups" {
   description = "Autoscaling group names of self managed node groups"
-  value       = var.create_eks && length(var.self_managed_node_groups) > 0 ? values({ for nodes in sort(keys(var.self_managed_node_groups)) : nodes => join(",", module.aws_eks_self_managed_node_groups[nodes].self_managed_asg_names) }) : []
+  value       = var.eks.create_eks && length(var.eks.self_managed_node_groups) > 0 ? values({ for nodes in sort(keys(var.eks.self_managed_node_groups)) : nodes => join(",", module.aws_eks_self_managed_node_groups[nodes].self_managed_asg_names) }) : []
 }
 
 output "self_managed_node_group_iam_instance_profile_id" {
   description = "IAM instance profile id of managed node groups"
-  value       = var.create_eks && length(var.self_managed_node_groups) > 0 ? values({ for nodes in sort(keys(var.self_managed_node_groups)) : nodes => join(",", module.aws_eks_self_managed_node_groups[nodes].self_managed_nodegroup_iam_instance_profile_id) }) : []
+  value       = var.eks.create_eks && length(var.eks.self_managed_node_groups) > 0 ? values({ for nodes in sort(keys(var.eks.self_managed_node_groups)) : nodes => join(",", module.aws_eks_self_managed_node_groups[nodes].self_managed_nodegroup_iam_instance_profile_id) }) : []
 }
 
 output "self_managed_node_group_aws_auth_config_map" {
@@ -120,42 +120,42 @@ output "windows_node_group_aws_auth_config_map" {
 #-------------------------------
 output "managed_node_groups" {
   description = "Outputs from EKS Managed node groups "
-  value       = var.create_eks && length(var.managed_node_groups) > 0 ? module.aws_eks_managed_node_groups[*] : []
+  value       = var.eks.create_eks && length(var.eks.managed_node_groups) > 0 ? module.aws_eks_managed_node_groups[*] : []
 }
 
 output "managed_node_groups_id" {
   description = "EKS Managed node groups id"
-  value       = var.create_eks && length(var.managed_node_groups) > 0 ? values({ for nodes in keys(var.managed_node_groups) : nodes => join(",", module.aws_eks_managed_node_groups[nodes].managed_nodegroup_id) }) : []
+  value       = var.eks.create_eks && length(var.eks.managed_node_groups) > 0 ? values({ for nodes in keys(var.eks.managed_node_groups) : nodes => join(",", module.aws_eks_managed_node_groups[nodes].managed_nodegroup_id) }) : []
 }
 
 output "managed_node_groups_status" {
   description = "EKS Managed node groups status"
-  value       = var.create_eks && length(var.managed_node_groups) > 0 ? values({ for nodes in keys(var.managed_node_groups) : nodes => join(",", module.aws_eks_managed_node_groups[nodes].managed_nodegroup_status) }) : []
+  value       = var.eks.create_eks && length(var.eks.managed_node_groups) > 0 ? values({ for nodes in keys(var.eks.managed_node_groups) : nodes => join(",", module.aws_eks_managed_node_groups[nodes].managed_nodegroup_status) }) : []
 }
 
 output "managed_node_group_arn" {
   description = "Managed node group arn"
-  value       = var.create_eks && length(var.managed_node_groups) > 0 ? values({ for nodes in keys(var.managed_node_groups) : nodes => join(",", module.aws_eks_managed_node_groups[nodes].managed_nodegroup_arn) }) : []
+  value       = var.eks.create_eks && length(var.eks.managed_node_groups) > 0 ? values({ for nodes in keys(var.eks.managed_node_groups) : nodes => join(",", module.aws_eks_managed_node_groups[nodes].managed_nodegroup_arn) }) : []
 }
 
 output "managed_node_group_iam_role_names" {
   description = "IAM role names of managed node groups"
-  value       = var.create_eks && length(var.managed_node_groups) > 0 ? values({ for nodes in keys(var.managed_node_groups) : nodes => join(",", module.aws_eks_managed_node_groups[nodes].managed_nodegroup_iam_role_name) }) : []
+  value       = var.eks.create_eks && length(var.eks.managed_node_groups) > 0 ? values({ for nodes in keys(var.eks.managed_node_groups) : nodes => join(",", module.aws_eks_managed_node_groups[nodes].managed_nodegroup_iam_role_name) }) : []
 }
 
 output "managed_node_group_iam_role_arns" {
   description = "IAM role arn's of managed node groups"
-  value       = var.create_eks && length(var.managed_node_groups) > 0 ? values({ for nodes in keys(var.managed_node_groups) : nodes => join(",", module.aws_eks_managed_node_groups[nodes].managed_nodegroup_iam_role_arn) }) : []
+  value       = var.eks.create_eks && length(var.eks.managed_node_groups) > 0 ? values({ for nodes in keys(var.eks.managed_node_groups) : nodes => join(",", module.aws_eks_managed_node_groups[nodes].managed_nodegroup_iam_role_arn) }) : []
 }
 
 output "managed_node_group_iam_instance_profile_id" {
   description = "IAM instance profile id of managed node groups"
-  value       = var.create_eks && length(var.managed_node_groups) > 0 ? values({ for nodes in keys(var.managed_node_groups) : nodes => join(",", module.aws_eks_managed_node_groups[nodes].managed_nodegroup_iam_instance_profile_id) }) : []
+  value       = var.eks.create_eks && length(var.eks.managed_node_groups) > 0 ? values({ for nodes in keys(var.eks.managed_node_groups) : nodes => join(",", module.aws_eks_managed_node_groups[nodes].managed_nodegroup_iam_instance_profile_id) }) : []
 }
 
 output "managed_node_group_iam_instance_profile_arns" {
   description = "IAM instance profile arn's of managed node groups"
-  value       = var.create_eks && length(var.managed_node_groups) > 0 ? values({ for nodes in keys(var.managed_node_groups) : nodes => join(",", module.aws_eks_managed_node_groups[nodes].managed_nodegroup_iam_instance_profile_arn) }) : []
+  value       = var.eks.create_eks && length(var.eks.managed_node_groups) > 0 ? values({ for nodes in keys(var.eks.managed_node_groups) : nodes => join(",", module.aws_eks_managed_node_groups[nodes].managed_nodegroup_iam_instance_profile_arn) }) : []
 }
 
 output "managed_node_group_aws_auth_config_map" {
@@ -173,7 +173,7 @@ output "fargate_profiles" {
 
 output "fargate_profiles_iam_role_arns" {
   description = "IAM role arn's for Fargate Profiles"
-  value       = var.create_eks && length(var.fargate_profiles) > 0 ? { for nodes in sort(keys(var.fargate_profiles)) : nodes => module.aws_eks_fargate_profiles[nodes].eks_fargate_profile_role_name } : null
+  value       = var.eks.create_eks && length(var.eks.fargate_profiles) > 0 ? { for nodes in sort(keys(var.eks.fargate_profiles)) : nodes => module.aws_eks_fargate_profiles[nodes].eks_fargate_profile_role_name } : null
 }
 
 output "fargate_profiles_aws_auth_config_map" {
@@ -186,12 +186,12 @@ output "fargate_profiles_aws_auth_config_map" {
 #-------------------------------
 output "emr_on_eks_role_arn" {
   description = "IAM execution role ARN for EMR on EKS"
-  value       = var.create_eks && var.enable_emr_on_eks ? values({ for nodes in sort(keys(var.emr_on_eks_teams)) : nodes => join(",", module.emr_on_eks[nodes].emr_on_eks_role_arn) }) : []
+  value       = var.eks.create_eks && var.eks.enable_emr_on_eks ? values({ for nodes in sort(keys(var.eks.emr_on_eks_teams)) : nodes => join(",", module.emr_on_eks[nodes].emr_on_eks_role_arn) }) : []
 }
 
 output "emr_on_eks_role_id" {
   description = "IAM execution role ID for EMR on EKS"
-  value       = var.create_eks && var.enable_emr_on_eks ? values({ for nodes in sort(keys(var.emr_on_eks_teams)) : nodes => join(",", module.emr_on_eks[nodes].emr_on_eks_role_id) }) : []
+  value       = var.eks.create_eks && var.eks.enable_emr_on_eks ? values({ for nodes in sort(keys(var.eks.emr_on_eks_teams)) : nodes => join(",", module.emr_on_eks[nodes].emr_on_eks_role_id) }) : []
 }
 
 #-------------------------------
@@ -199,5 +199,5 @@ output "emr_on_eks_role_id" {
 #-------------------------------
 output "teams" {
   description = "Outputs from EKS Fargate profiles groups "
-  value       = var.create_eks && (length(var.platform_teams) > 0 || length(var.application_teams) > 0) ? module.aws_eks_teams[*] : []
+  value       = var.eks.create_eks && (length(var.eks.platform_teams) > 0 || length(var.eks.application_teams) > 0) ? module.aws_eks_teams[*] : []
 }

@@ -3,16 +3,16 @@ data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
 data "aws_eks_cluster" "cluster" {
-  count = var.create_eks ? 1 : 0
+  count = var.eks.create_eks ? 1 : 0
   name  = module.aws_eks.cluster_id
 }
 
 data "http" "eks_cluster_readiness" {
-  count = var.create_eks ? 1 : 0
+  count = var.eks.create_eks ? 1 : 0
 
   url            = join("/", [data.aws_eks_cluster.cluster[0].endpoint, "healthz"])
   ca_certificate = base64decode(data.aws_eks_cluster.cluster[0].certificate_authority[0].data)
-  timeout        = var.eks_readiness_timeout
+  timeout        = var.eks.eks_readiness_timeout
 }
 
 data "aws_iam_session_context" "current" {
@@ -83,7 +83,7 @@ data "aws_iam_policy_document" "eks_key" {
     principals {
       type = "AWS"
       identifiers = concat(
-        var.cluster_kms_key_additional_admin_arns,
+        var.eks.cluster_kms_key_additional_admin_arns,
         [data.aws_iam_session_context.current.issuer_arn]
       )
     }

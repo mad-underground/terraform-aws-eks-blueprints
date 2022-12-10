@@ -1,5 +1,5 @@
 resource "kubernetes_config_map" "aws_auth" {
-  count = var.create_eks ? 1 : 0
+  count = var.eks.create_eks ? 1 : 0
 
   metadata {
     name      = "aws-auth"
@@ -9,7 +9,7 @@ resource "kubernetes_config_map" "aws_auth" {
         "app.kubernetes.io/managed-by" = "terraform-aws-eks-blueprints"
         "app.kubernetes.io/created-by" = "terraform-aws-eks-blueprints"
       },
-      var.aws_auth_additional_labels
+      var.eks.aws_auth_additional_labels
     )
   }
 
@@ -23,11 +23,11 @@ resource "kubernetes_config_map" "aws_auth" {
         local.emr_on_eks_config_map,
         local.application_teams_config_map,
         local.platform_teams_config_map,
-        var.map_roles,
+        var.eks.map_roles,
       ))
     )
-    mapUsers    = yamlencode(var.map_users)
-    mapAccounts = yamlencode(var.map_accounts)
+    mapUsers    = yamlencode(var.eks.map_users)
+    mapAccounts = yamlencode(var.eks.map_accounts)
   }
 
   depends_on = [module.aws_eks.cluster_id, data.http.eks_cluster_readiness[0]]

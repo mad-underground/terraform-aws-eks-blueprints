@@ -5,7 +5,7 @@ variable "eks" {
     tags = optional(map(string), {})
 
     # "VPC Id"
-    vpc_id = optional(string, {})
+    vpc_id = string
 
     # "List of private subnets Ids for the cluster and worker nodes"
     private_subnet_ids = optional(list(string), [])

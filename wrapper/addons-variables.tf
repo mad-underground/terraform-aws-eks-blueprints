@@ -1,6 +1,9 @@
 variable "addons" {
   description = "AWS EKS resources to be created"
+  default = { create_addons = false }
   type = object({
+
+    create_addons = optional(bool, false)
 
     # "The domain for the EKS cluster"
     eks_cluster_domain = optional(string, "")

@@ -1,6 +1,6 @@
 module "kubernetes_addons" {
   source = "../modules/kubernetes-addons/"
-  count = var.eks.create_eks ? 1 : 0
+  count = var.addons.create_addons ? 1 : 0
   eks_cluster_id = module.eks.eks_cluster_id
   eks_cluster_domain = var.addons.eks_cluster_domain
   eks_worker_security_group_id = var.addons.eks_worker_security_group_id

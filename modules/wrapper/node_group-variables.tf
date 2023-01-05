@@ -53,7 +53,7 @@ variable "node_groups" {
     })), [])
 
     # "additional labels for auth"
-    aws_auth_additional_labels = optional(map(string, {}))
+    aws_auth_additional_labels = optional(map(string), {})
 
   })
 

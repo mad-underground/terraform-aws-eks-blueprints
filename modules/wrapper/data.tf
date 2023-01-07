@@ -5,3 +5,7 @@ data "aws_region" "current" {}
 data "aws_eks_cluster" "cluster" {
   name = local.eks_cluster_id
 }
+
+data "aws_eks_cluster_auth" "cluster" {
+  name = local.eks_cluster_id
+}

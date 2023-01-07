@@ -8,12 +8,17 @@ locals {
     local.eks_module.eks_cluster_version, 
     null
   )
-  eks_cluster_id = try(
-    var.node_groups.eks_cluster_id, 
-    var.kubernetes_addons.eks_cluster_id,
-    local.eks_module.eks_cluster_id,
-    null
+  
+  eks_cluster_id = (
+    var.node_groups != null 
+    ? var.node_groups.eks_cluster_id
+    : var.kubernetes_addons.eks_cluster_id != null 
+    ? var.kubernetes_addons.eks_cluster_id
+    : var.eks_cluster.create_eks
+    ? try(local.eks_module.eks_cluster_id, var.eks_cluster.cluster_name)
+    : null
   )
+
   vpc_id = try(var.node_groups.vpc_id, var.eks_cluster.vpc_id, null)
   cluster_ca_base64 = try(data.aws_eks_cluster.cluster.certificate_authority[0].data, null)
   cluster_endpoint = try(data.aws_eks_cluster.cluster.endpoint, null)

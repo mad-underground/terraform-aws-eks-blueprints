@@ -1,3 +1,7 @@
+output "eks_cluster_id" {
+  value = local.eks_cluster_id
+}
+
 output "eks_cluster" {
   value = var.eks_cluster.create_eks ? one(module.eks) : null
 }

@@ -1,6 +1,10 @@
 locals {
   name = "rabbitmq-cluster-operator"
   namespace = "rabbitmq-system"
+
+  argocd_gitops_config = {
+    enable = true
+  }
 }
 
 resource "kubernetes_namespace_v1" "this" {

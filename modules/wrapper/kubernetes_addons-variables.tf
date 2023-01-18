@@ -689,5 +689,9 @@ variable "kubernetes_addons" {
     # "Consul Helm Chart config"
     consul_helm_config = optional(any, {})
 
+    enable_rabbitmq_cluster_operator = optional(bool, false)
+
+    rabbitmq_cluster_operator_helm_config = optional(any, {})
+
   })
 }

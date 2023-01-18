@@ -226,4 +226,6 @@ module "kubernetes_addons" {
   emr_on_eks_config = var.kubernetes_addons.emr_on_eks_config
   enable_consul = var.kubernetes_addons.enable_consul
   consul_helm_config = var.kubernetes_addons.consul_helm_config
+  enable_rabbitmq_cluster_operator = var.kubernetes_addons.enable_rabbitmq_cluster_operator
+  rabbitmq_cluster_operator_helm_config = var.kubernetes_addons.rabbitmq_cluster_operator_helm_config
 }

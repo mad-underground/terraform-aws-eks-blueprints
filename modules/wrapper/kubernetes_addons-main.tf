@@ -228,4 +228,6 @@ module "kubernetes_addons" {
   consul_helm_config = var.kubernetes_addons.consul_helm_config
   enable_rabbitmq_cluster_operator = var.kubernetes_addons.enable_rabbitmq_cluster_operator
   rabbitmq_cluster_operator_helm_config = var.kubernetes_addons.rabbitmq_cluster_operator_helm_config
+  enable_redis = var.kubernetes_addons.enable_redis
+  redis_helm_config = var.kubernetes_addons.redis_helm_config
 }

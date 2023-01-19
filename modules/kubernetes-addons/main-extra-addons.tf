@@ -5,3 +5,11 @@ module "rabbitmq_cluster_operator" {
   manage_via_gitops = var.argocd_manage_add_ons
   addon_context     = local.addon_context
 }
+
+module "redis" {
+  count             = var.enable_redis ? 1 : 0
+  source            = "./redis"
+  helm_config       = var.redis_helm_config
+  manage_via_gitops = var.argocd_manage_add_ons
+  addon_context     = local.addon_context
+}

@@ -693,5 +693,9 @@ variable "kubernetes_addons" {
 
     rabbitmq_cluster_operator_helm_config = optional(any, {})
 
+    enable_redis = optional(bool, false)
+
+    redis_helm_config = optional(any, {})
+
   })
 }

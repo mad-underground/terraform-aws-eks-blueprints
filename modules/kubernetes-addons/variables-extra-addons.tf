@@ -10,3 +10,16 @@ variable "rabbitmq_cluster_operator_helm_config" {
   type        = any
   default     = {}
 }
+
+#-----------REDIS-------------
+variable "enable_redis" {
+  description = "Enable Redis add-on"
+  type        = bool
+  default     = false
+}
+
+variable "redis_helm_config" {
+  description = "Redis Helm Chart config"
+  type        = any
+  default     = {}
+}

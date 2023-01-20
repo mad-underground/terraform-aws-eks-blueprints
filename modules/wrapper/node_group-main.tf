@@ -29,13 +29,17 @@ module "aws_eks_self_managed_node_groups" {
 }
 
 
-resource "kubernetes_config_map_v1_data" "aws_auth" {
+resource "kubernetes_config_map" "aws_auth" {
 
   count = local.enable_workers ? 1 : 0
 
   metadata {
     name      = "aws-auth"
     namespace = "kube-system"
+    labels = {
+        "app.kubernetes.io/managed-by" = "terraform-aws-eks-blueprints"
+        "app.kubernetes.io/created-by" = "terraform-aws-eks-blueprints"
+      }
   }
 
   data = {
@@ -49,7 +53,5 @@ resource "kubernetes_config_map_v1_data" "aws_auth" {
     mapUsers    = yamlencode(try(var.node_groups.map_users, []))
     mapAccounts = yamlencode(try(var.node_groups.map_accounts, []))
   }
-
-  force = true
 
 }

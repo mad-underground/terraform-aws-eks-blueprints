@@ -31,5 +31,5 @@ output "addons" {
 }
 
 output "aws_auth_config_map" {
-  value = local.enable_workers ? one(kubernetes_config_map_v1_data.aws_auth) : null
+  value = local.enable_workers ? one(kubernetes_config_map.aws_auth) : null
 }
